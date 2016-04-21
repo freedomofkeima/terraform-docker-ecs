@@ -2,6 +2,8 @@
 
 This repository provides a tutorial to deploy a simple webapp (https://github.com/docker-training/webapp) to ASG cluster which utilizes ECS as its container service.
 
+Blogpost: http://freedomofkeima.com/blog/posts/flag-9-scalable-deployment-with-terraform-docker-ecs
+
 Advantage of using Terraform in managing ASG + ECS cluster with Docker:
 - Scalability: We can simply add number of running instances in ASG and desired number of tasks in ECS
 - Easy deployment and rollback: With Docker tag as version marker and ECS minimum healthy percent, we can specify it in Terraform to execute rolling update to our servers (See: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service.html). One simple command and you can release your new web application anytime.
@@ -73,7 +75,7 @@ The workflow for each part is basically quite the same:
 
 ## Additional information
 
-It's recommended to store `terraform.tfstate` them remotely. In this case, you can share your current environment state with other members. You can utilize S3, Atlas, etc to store your tfstate. For further information, please read it at the official documentation: https://www.terraform.io/docs/commands/remote-config.html.
+It's recommended to store `terraform.tfstate` remotely. In this case, you can share your current environment state with other members. You can utilize S3, Atlas, etc to store your tfstate. For further information, please read it at the official documentation: https://www.terraform.io/docs/commands/remote-config.html.
 
 Not only that, you could simplify `asg` to use `common` environment as its remote state. All `outputs` from `common` will be consumed directly by `asg` and therefore you don't need to specify those values in `configuration.tfvars` any longer. For further information, please read it at the official documentation: https://www.terraform.io/docs/providers/terraform/r/remote_state.html.
 

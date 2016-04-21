@@ -2,7 +2,7 @@
 # Some of these variables may be removed from this file if the default value exists
 # For better understanding, let's specify all variables explicitly here
 ##
-name_prefix = "tutorial-test2"
+name_prefix = "tutorial-test"
 aws_region = "ap-northeast-1"
 ecs_image_id.ap-northeast-1 = "ami-b3afa2dd"
 count_webapp = 2
