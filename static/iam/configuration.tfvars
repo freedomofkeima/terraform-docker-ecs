@@ -1,2 +1,2 @@
-name_prefix = "iskandar-tutorial-test"
+name_prefix = "tutorial-test"
 aws_region = "ap-northeast-1"

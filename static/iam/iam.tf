@@ -21,7 +21,7 @@ resource "aws_iam_role" "ecs_instance_role" {
       "Principal": {
         "Service": "ec2.amazonaws.com"
       },
-      "Effect": "Allow"
+      "Effect": "Allow",
       "Sid": ""
     }
   ]
@@ -53,31 +53,6 @@ resource "aws_iam_role_policy" "ecs_instance_role_policy" {
       ]
     }
   ] 
-}
-EOF
-}
-
-resource "aws_iam_role_policy" "cloudwatch_logs_policy" {
-    name = "${var.name_prefix}_cloudwatch_logs"
-    role = "${aws_iam_role.ecs_instance_role.id}"
-    policy = <<EOF
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "logs:CreateLogGroup",
-                "logs:CreateLogStream",
-                "logs:PutLogEvents",
-                "logs:DescribeLogGroups",
-                "logs:DescribeLogStreams"
-            ],
-            "Resource": [
-                "arn:aws:logs:*:*:*"
-            ]
-        }
-    ]
 }
 EOF
 }

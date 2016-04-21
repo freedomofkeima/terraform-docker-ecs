@@ -8,6 +8,7 @@ variable "aws_region" {
     description = "Determine AWS region endpoint to access."
 }
 
+/* Region settings for AWS provider */
 provider "aws" {
     region = "${var.aws_region}"
 }
