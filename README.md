@@ -1,10 +1,10 @@
 # terraform-docker-ecs
 
-This repository provides a tutorial to deploy a simple webapp to ASG cluster which utilizes ECS as its container service.
+This repository provides a tutorial to deploy a simple webapp (https://github.com/docker-training/webapp) to ASG cluster which utilizes ECS as its container service.
 
 Advantage of using Terraform in managing ASG + ECS cluster with Docker:
 - Scalability: We can simply add number of running instances in ASG and desired number of tasks in ECS
-- Easy deployment and rollback: With Docker tag as version marker and ECS minimum healthy percent, we can specify it in Terraform to execute rolling update to our servers. One simple command and you can release your new web application anytime.
+- Easy deployment and rollback: With Docker tag as version marker and ECS minimum healthy percent, we can specify it in Terraform to execute rolling update to our servers (See: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service.html). One simple command and you can release your new web application anytime.
 
 
 ## Requirement
@@ -22,11 +22,11 @@ In our project, we divide Terraform configuration files into three main categori
 
 **Why do we separate our Terraform configuration files into three categories?**
 
-Reason 1: Sometimes, we don't want to touch specific environments after initial creation. For example, we don't want to destroy our DynamoDB Tables, IAM role, and SQS queues. That's why we create a specific `static` category for this scenario.
+**Reason 1**: Sometimes, we don't want to touch specific part of our environments after initial creation. For example, we don't want to destroy our DynamoDB Tables, IAM role, and SQS queues. That's why we create a specific `static` category for this scenario.
 
-Reason 2: We want to deploy our application in several regions, let's say, `ap-northeast-1` a.k.a Tokyo and `ap-southeast-1` a.k.a Singapore. IAM role are global configuration which only needs to be executed one time while we may need to replicate `asg` to several environments.
+**Reason 2**: We want to deploy our application in several regions, let's say, `ap-northeast-1` a.k.a Tokyo and `ap-southeast-1` a.k.a Singapore. IAM role are global configuration which only needs to be executed one time while we may need to replicate `asg` to several environments.
 
-Reason 3: For application versioning, we usually only change Docker tag version or instance's launch configuration. Therefore, we separate the category into two: `asg` and `common`. We don't want to touch our VPC for each deployment, which makes it reasonable to put these configurations under `common` category.
+**Reason 3**: For application versioning, we usually only change Docker tag version or instance's launch configuration. Therefore, we separate the category into two: `asg` and `common`. We don't want to touch our VPC for each deployment, which makes it reasonable to put these configurations under `common` category.
 
 ```
 ├── asg
@@ -65,7 +65,8 @@ Reason 3: For application versioning, we usually only change Docker tag version 
 For the first step, we need to deploy these environments in order: `static` --> `common` --> `asg`. After first deployment, our changes will usually happen in `asg` category, so we don't need to touch other environments anymore.
 
 The workflow for each part is basically quite the same:
-1. Modify **configuration.tfvars** variables
+
+1. Modify configuration.tfvars variables
 2. Run `terraform plan -var-file=configuration.tfvars` and confirm changes
 3. Run `terraform apply -var-file=configuration.tfvars`
 
@@ -74,11 +75,11 @@ The workflow for each part is basically quite the same:
 
 It's recommended to store `terraform.tfstate` them remotely. In this case, you can share your current environment state with other members. You can utilize S3, Atlas, etc to store your tfstate. For further information, please read it at the official documentation: https://www.terraform.io/docs/commands/remote-config.html.
 
-After that, you could simplify `asg` to use `common` environment as its remote state. All `outputs` from `common` will be consumed directly by `asg` and therefore you don't need to specify those values in `configuration.tfvars` any longer. For further information, please read it at the official documentation: https://www.terraform.io/docs/providers/terraform/r/remote_state.html.
+Not only that, you could simplify `asg` to use `common` environment as its remote state. All `outputs` from `common` will be consumed directly by `asg` and therefore you don't need to specify those values in `configuration.tfvars` any longer. For further information, please read it at the official documentation: https://www.terraform.io/docs/providers/terraform/r/remote_state.html.
 
 
 ## License
 
 MIT License.
 
-Last Updated: April 20, 2016
+Last Updated: April 21, 2016
