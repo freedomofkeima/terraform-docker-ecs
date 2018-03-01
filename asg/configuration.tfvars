@@ -4,7 +4,7 @@
 ##
 name_prefix = "tutorial-test"
 aws_region = "ap-northeast-1"
-ecs_image_id.ap-northeast-1 = "ami-b3afa2dd"
+ecs_image_id.ap-northeast-1 = "ami-68ef940e"
 count_webapp = 2
 desired_capacity_on_demand = 2
 ec2_key_name = "key-name"
