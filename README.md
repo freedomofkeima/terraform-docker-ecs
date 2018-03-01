@@ -31,35 +31,36 @@ In our project, we divide Terraform configuration files into three main categori
 **Reason 3**: For application versioning, we usually only change Docker tag version or instance's launch configuration. Therefore, we separate the category into two: `asg` and `common`. We don't want to touch our VPC for each deployment, which makes it reasonable to put these configurations under `common` category.
 
 ```
-??? asg
-|   ??? task-definition
-|   |   ??? ecs_task_webapp.tpl
-|   |   ??? ... (another task definitions)
-|   ??? autoscaling.tf
-|   ??? autoscaling_user_data.tpl
-|   ??? configuration.tfvars
-|   ??? ecs.tf
-|   ??? alb.tf
-|   ??? output.tf
-|   ??? vars.tf
-|   ??? ... (other ASG related files)
+├── asg
+|   ├── task-definition
+|   |   ├── ecs_task_webapp.tpl
+|   |   └── ... (another task definitions)
+|   ├── autoscaling.tf
+|   ├── autoscaling_user_data.tpl
+|   ├── configuration.tfvars
+|   ├── ecs.tf
+|   ├── alb.tf
+|   ├── output.tf
+|   ├── vars.tf
+|   └── ... (other ASG related files)
 |
-??? common
-|   ??? configuration.tfvars
-|   ??? output.tf
-|   ??? security_groups.tf
-|   ??? vpc.tf
-|   ??? vars.tf
-|   ??? ... (other common related files)
+├── common
+|   ├── configuration.tfvars
+|   ├── output.tf
+|   ├── security_groups.tf
+|   ├── vpc.tf
+|   ├── vars.tf
+|   └── ... (other common related files)
 |
-??? static
-    ??? iam
-    |   ??? configuration.tfvars
-    |   ??? iam.tf
-    |   ??? output.tf
-    |   ??? vars.tf
-    ??? ... (other AWS services: SQS, DynamoDB, etc)
+└── static
+    ├── iam
+    |   ├── configuration.tfvars
+    |   ├── iam.tf
+    |   ├── output.tf
+    |   └── vars.tf  
+    └── ... (other AWS services: SQS, DynamoDB, etc)
 ```
+
 
 
 ## Deployment steps
