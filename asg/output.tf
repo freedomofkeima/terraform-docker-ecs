@@ -1,7 +1,7 @@
 /**
-  * DNS name from ELB
+  * DNS name from ALB
   * In production, you can add this DNS Name to Route 53 (your domain)
   */
-output "elb_dns_name" {
-    value = "${aws_elb.main.dns_name}"
+output "alb_dns_name" {
+    value = "${aws_alb.main.dns_name}"
 }

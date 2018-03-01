@@ -13,7 +13,7 @@ resource "aws_ecs_service" "webapp_service" {
     iam_role = "${var.ecs_service_role}"
 
     load_balancer {
-        elb_name = "${aws_elb.main.id}"
+        target_group_arn = "${aws_alb_target_group.webapp_tg.arn}"
         container_name = "webapp"
         container_port = 5000
     }

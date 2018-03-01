@@ -13,12 +13,12 @@ Advantage of using Terraform in managing ASG + ECS cluster with Docker:
 
 - Terraform (https://www.terraform.io/downloads.html)
 - Set `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variable in your local environment
- 
+
 
 ## Directory structure
 
 In our project, we divide Terraform configuration files into three main categories:
-- `asg`: Autoscaling groups (ASG), Elastic Load Balancer (ELB), ECS fall into this category
+- `asg`: Autoscaling groups (ASG), Application Load Balancer (ALB), ECS fall into this category
 - `common`: Common architecture which is rarely changed (VPC) but we still want to manage them with Terraform
 - `static`: As the name suggests, we usually create this static configuration only once. Furthermore, we usually don't want to delete any resource from this category. IAM, DynamoDB tables, SQS queues, S3 bucket fall into this category
 
@@ -39,7 +39,7 @@ In our project, we divide Terraform configuration files into three main categori
 |   ├── autoscaling_user_data.tpl
 |   ├── configuration.tfvars
 |   ├── ecs.tf
-|   ├── elb.tf
+|   ├── alb.tf
 |   ├── output.tf
 |   ├── vars.tf
 |   └── ... (other ASG related files)
@@ -60,6 +60,7 @@ In our project, we divide Terraform configuration files into three main categori
     |   └── vars.tf  
     └── ... (other AWS services: SQS, DynamoDB, etc)
 ```
+
 
 
 ## Deployment steps

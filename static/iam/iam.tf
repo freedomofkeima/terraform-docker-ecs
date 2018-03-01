@@ -52,7 +52,7 @@ resource "aws_iam_role_policy" "ecs_instance_role_policy" {
         "*"
       ]
     }
-  ] 
+  ]
 }
 EOF
 }
@@ -91,8 +91,8 @@ resource "aws_iam_role_policy" "ecs_service_role_policy" {
       "Effect": "Allow",
       "Action": [
         "elasticloadbalancing:Describe*",
-        "elasticloadbalancing:DeregisterInstancesFromLoadBalancer",
-        "elasticloadbalancing:RegisterInstancesWithLoadBalancer",
+        "elasticloadbalancing:DeregisterTargets",
+        "elasticloadbalancing:RegisterTargets",
         "ec2:Describe*",
         "ec2:AuthorizeSecurityGroupIngress"
       ],
