@@ -1,3 +1,8 @@
+/* Terraform constraints */
+terraform {
+    required_version = ">= 0.11, < 0.12"
+}
+
 variable "name_prefix" {
     default = "tutorial"
     description = "Name prefix for this environment."
@@ -57,7 +62,7 @@ variable "minimum_healthy_percent_webapp" {
 }
 
 /* Consume common outputs */
-variable "sg_webapp_elbs_id" {}
+variable "sg_webapp_albs_id" {}
 variable "sg_webapp_instances_id" {}
 variable "vpc_id" {}
 variable "subnet_ids" {}

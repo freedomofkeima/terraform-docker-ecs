@@ -1,10 +1,10 @@
 /**
   * We will utilize ELB and allow web access only from ELB
   */
-resource "aws_security_group" "webapp_elbs" {
-    name = "${var.name_prefix}-webapp-elbs"
+resource "aws_security_group" "webapp_albs" {
+    name = "${var.name_prefix}-webapp-albs"
     vpc_id = "${aws_vpc.main.id}"
-    description = "Security group for ELBs"
+    description = "Security group for ALBs"
 
     ingress {
         from_port = 80
@@ -50,14 +50,14 @@ resource "aws_security_group_rule" "allow_all_egress" {
 }
 
 /* Allow incoming requests from ELB and peers only */
-resource "aws_security_group_rule" "allow_all_from_elbs" {
+resource "aws_security_group_rule" "allow_all_from_albs" {
     type = "ingress"
     from_port = 0
     to_port = 0
     protocol = "-1"
 
     security_group_id = "${aws_security_group.webapp_instances.id}"
-    source_security_group_id = "${aws_security_group.webapp_elbs.id}"
+    source_security_group_id = "${aws_security_group.webapp_albs.id}"
 }
 
 resource "aws_security_group_rule" "allow_all_from_peers" {

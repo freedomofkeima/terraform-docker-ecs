@@ -22,7 +22,7 @@ webapp_docker_image_tag = "latest"
 ##
 # These variables are required, please fill it out with your environment outputs
 ##
-sg_webapp_elbs_id = "sg-12345678"
+sg_webapp_albs_id = "sg-12345678"
 sg_webapp_instances_id = "sg-23456789"
 vpc_id = "vpc-aabbccdd"
 subnet_ids = "subnet-34567890,subnet-4567890a"

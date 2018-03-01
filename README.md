@@ -1,8 +1,10 @@
 # terraform-docker-ecs
 
+**Update**: This project is originally written on April 2016 with Terraform 0.6. On March 2018, ELB is updated to ALB and this repository is now tested with Terraform 0.11.
+
 This repository provides a tutorial to deploy a simple webapp (https://github.com/docker-training/webapp) to ASG cluster which utilizes ECS as its container service.
 
-Blogpost: http://freedomofkeima.com/blog/posts/flag-9-scalable-deployment-with-terraform-docker-ecs
+Blogpost (2016 ver.): http://freedomofkeima.com/blog/posts/flag-9-scalable-deployment-with-terraform-docker-ecs
 
 Advantage of using Terraform in managing ASG + ECS cluster with Docker:
 - Scalability: We can simply add number of running instances in ASG and desired number of tasks in ECS
@@ -35,11 +37,11 @@ In our project, we divide Terraform configuration files into three main categori
 |   ├── task-definition
 |   |   ├── ecs_task_webapp.tpl
 |   |   └── ... (another task definitions)
+|   ├── alb.tf
 |   ├── autoscaling.tf
 |   ├── autoscaling_user_data.tpl
 |   ├── configuration.tfvars
 |   ├── ecs.tf
-|   ├── alb.tf
 |   ├── output.tf
 |   ├── vars.tf
 |   └── ... (other ASG related files)
@@ -70,8 +72,9 @@ For the first step, we need to deploy these environments in order: `static` --> 
 The workflow for each part is basically quite the same:
 
 1. Modify configuration.tfvars variables
-2. Run `terraform plan -var-file=configuration.tfvars` and confirm changes
-3. Run `terraform apply -var-file=configuration.tfvars`
+2. Run `terraform init` to initialize things
+3. Run `terraform plan -var-file=configuration.tfvars` and confirm changes
+4. Run `terraform apply -var-file=configuration.tfvars`
 
 
 ## Additional information
@@ -85,4 +88,4 @@ Not only that, you could simplify `asg` to use `common` environment as its remot
 
 MIT License.
 
-Last Updated: April 21, 2016
+Last Updated: March 2, 2018

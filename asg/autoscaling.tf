@@ -2,7 +2,7 @@ resource "aws_launch_configuration" "webapp_on_demand" {
     instance_type = "${var.instance_type}"
     image_id = "${lookup(var.ecs_image_id, var.aws_region)}"
     iam_instance_profile = "${var.ecs_instance_profile}"
-    user_data = "${template_file.autoscaling_user_data.rendered}"
+    user_data = "${data.template_file.autoscaling_user_data.rendered}"
     key_name = "${var.ec2_key_name}"
     security_groups = ["${var.sg_webapp_instances_id}"]
     associate_public_ip_address = true
@@ -34,13 +34,9 @@ resource "aws_autoscaling_group" "webapp_on_demand" {
     }
 }
 
-resource "template_file" "autoscaling_user_data" {
+data "template_file" "autoscaling_user_data" {
     template = "${file("autoscaling_user_data.tpl")}"
     vars {
         ecs_cluster = "${aws_ecs_cluster.webapp_cluster.name}"
-    }
-
-    lifecycle {
-        create_before_destroy = true
     }
 }

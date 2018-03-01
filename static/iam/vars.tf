@@ -1,3 +1,8 @@
+/* Terraform constraints */
+terraform {
+    required_version = ">= 0.11, < 0.12"
+}
+
 variable "name_prefix" {
     default = "tutorial"
     description = "Name prefix for this environment."

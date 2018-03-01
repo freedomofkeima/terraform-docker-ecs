@@ -1,6 +1,6 @@
 /* Security group */
-output "sg_webapp_elbs_id" {
-    value = "${aws_security_group.webapp_elbs.id}"
+output "sg_webapp_albs_id" {
+    value = "${aws_security_group.webapp_albs.id}"
 }
 
 output "sg_webapp_instances_id" {

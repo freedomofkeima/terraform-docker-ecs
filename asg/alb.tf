@@ -2,7 +2,8 @@ resource "aws_alb" "main" {
   lifecycle { create_before_destroy = true }
   name = "${var.name_prefix}-webapp-alb"
   subnets = [ "${split(",", var.subnet_ids)}" ]
-  security_groups = ["${var.sg_webapp_elbs_id}"]
+  security_groups = ["${var.sg_webapp_albs_id}"]
+  idle_timeout = 400
   tags {
         Name = "${var.name_prefix}_webapp_alb"
   }
@@ -13,6 +14,8 @@ resource "aws_alb_target_group" "webapp_tg" {
   port                 = "5000"
   protocol             = "HTTP"
   vpc_id               = "${var.vpc_id}"
+
+  deregistration_delay = 180
 
   health_check {
     interval            = "60"
