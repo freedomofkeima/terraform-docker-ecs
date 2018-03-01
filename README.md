@@ -79,9 +79,9 @@ The workflow for each part is basically quite the same:
 
 ## Additional information
 
-It's recommended to store `terraform.tfstate` remotely. In this case, you can share your current environment state with other members. You can utilize S3, Atlas, etc to store your tfstate. For further information, please read it at the official documentation: https://www.terraform.io/docs/commands/remote-config.html.
+It's recommended to store `terraform.tfstate` remotely. In this case, you can share your current environment state with other members. You can utilize S3, Atlas, etc to store your tfstate. For further information, please read it at the official documentation: https://www.terraform.io/docs/backends/index.html.
 
-Not only that, you could simplify `asg` to use `common` environment as its remote state. All `outputs` from `common` will be consumed directly by `asg` and therefore you don't need to specify those values in `configuration.tfvars` any longer. For further information, please read it at the official documentation: https://www.terraform.io/docs/providers/terraform/r/remote_state.html.
+Not only that, you could simplify `asg` to use `common` environment as its remote state. All `outputs` from `common` will be consumed directly by `asg` and therefore you don't need to specify those values in `configuration.tfvars` any longer. For further information, please read it at the official documentation: https://www.terraform.io/docs/state/remote.html.
 
 
 ## License
