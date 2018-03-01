@@ -84,6 +84,11 @@ It's recommended to store `terraform.tfstate` remotely. In this case, you can sh
 Not only that, you could simplify `asg` to use `common` environment as its remote state. All `outputs` from `common` will be consumed directly by `asg` and therefore you don't need to specify those values in `configuration.tfvars` any longer. For further information, please read it at the official documentation: https://www.terraform.io/docs/state/remote.html.
 
 
+## Contributors
+
+- [Iskandar Setiadi](https://github.com/freedomofkeima)
+- [Neill Turner](https://github.com/neillturner)
+
 ## License
 
 MIT License.

@@ -25,21 +25,17 @@ resource "aws_ecs_service" "webapp_service" {
 
 resource "aws_ecs_task_definition" "webapp_definition" {
     family = "${var.name_prefix}_webapp"
-    container_definitions = "${template_file.task_webapp.rendered}"
+    container_definitions = "${data.template_file.task_webapp.rendered}"
 
     lifecycle {
         create_before_destroy = true
     }
 }
 
-resource "template_file" "task_webapp" {
+data "template_file" "task_webapp" {
     template= "${file("task-definitions/ecs_task_webapp.tpl")}"
 
     vars {
         webapp_docker_image = "${var.webapp_docker_image_name}:${var.webapp_docker_image_tag}"
-    }
-
-    lifecycle {
-        create_before_destroy = true
     }
 }
