@@ -59,6 +59,7 @@ variable "minimum_healthy_percent_webapp" {
 /* Consume common outputs */
 variable "sg_webapp_elbs_id" {}
 variable "sg_webapp_instances_id" {}
+variable "vpc_id" {}
 variable "subnet_ids" {}
 
 /* Consume static outputs */
