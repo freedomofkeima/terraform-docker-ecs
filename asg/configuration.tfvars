@@ -24,6 +24,7 @@ webapp_docker_image_tag = "latest"
 ##
 sg_webapp_elbs_id = "sg-12345678"
 sg_webapp_instances_id = "sg-23456789"
+vpc_id = "vpc-aabbccdd"
 subnet_ids = "subnet-34567890,subnet-4567890a"
 
 ecs_instance_profile = "arn:aws:iam::123456789012:instance-profile/tutorial-test_ecs_instance_profile"
