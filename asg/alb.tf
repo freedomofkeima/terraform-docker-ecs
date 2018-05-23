@@ -17,6 +17,8 @@ resource "aws_alb_target_group" "webapp_tg" {
 
   deregistration_delay = 180
 
+  target_type = "${var.launch_type == "FARGATE" ? "ip" : "instance"}"
+
   health_check {
     interval            = "60"
     path                = "/"

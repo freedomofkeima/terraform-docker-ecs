@@ -76,6 +76,13 @@ The workflow for each part is basically quite the same:
 3. Run `terraform plan -var-file=configuration.tfvars` and confirm changes
 4. Run `terraform apply -var-file=configuration.tfvars`
 
+## Fargate
+
+By default the ECS cluster is deployed on EC2 ECS instances. Specifying variable
+```
+ launch_type = "FARGATE"
+```
+will cause the cluster to use FARGATE infrastructure. Currently fargate doesn't support docker private registries. Only Amazon's ECR Registry and Docker Public Registries.
 
 ## Additional information
 
