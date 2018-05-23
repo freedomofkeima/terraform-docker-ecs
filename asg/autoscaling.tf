@@ -1,4 +1,5 @@
 resource "aws_launch_configuration" "webapp_on_demand" {
+    count = "${var.launch_type == "FARGATE" ? 0 : 1}"
     instance_type = "${var.instance_type}"
     image_id = "${lookup(var.ecs_image_id, var.aws_region)}"
     iam_instance_profile = "${var.ecs_instance_profile}"
@@ -13,10 +14,11 @@ resource "aws_launch_configuration" "webapp_on_demand" {
 }
 
 resource "aws_autoscaling_group" "webapp_on_demand" {
+    count = "${var.launch_type == "FARGATE" ? 0 : 1}"
     name = "${var.name_prefix}_webapp_on_demand"
     max_size = 50
     min_size = 0
-    desired_capacity = "${var.desired_capacity_on_demand}" 
+    desired_capacity = "${var.desired_capacity_on_demand}"
     health_check_grace_period = 300
     health_check_type = "EC2"
     force_delete = true
@@ -35,6 +37,7 @@ resource "aws_autoscaling_group" "webapp_on_demand" {
 }
 
 data "template_file" "autoscaling_user_data" {
+    count = "${var.launch_type == "FARGATE" ? 0 : 1}"
     template = "${file("autoscaling_user_data.tpl")}"
     vars {
         ecs_cluster = "${aws_ecs_cluster.webapp_cluster.name}"
